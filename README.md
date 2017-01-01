@@ -1,5 +1,5 @@
 # Node-Express
 Simple Node.js app using Express framework
 
-Run node index to start server. 
-Navigate to http://localhost:3000/
+Run <code>node index</code> to start server. 
+Navigate to <a href="http://localhost:3000/">http://localhost:3000/</a>
