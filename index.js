@@ -14,11 +14,31 @@ app.use(bodyParser.urlencoded({extended: false})); // parse application/x-www-fo
 // Set Middleware for Public folder where Static Resources will be Stored
 app.use(express.static(path.join(__dirname, "public")));
 
+// Users Array Of Objects
+var users = [
+    {
+        first_name: 'John',
+        last_name: 'Doe',
+        email: 'jdoe@email.com'
+    },
+    {
+        first_name: 'Jane',
+        last_name: 'Smith',
+        email: 'jsmith@email.com'
+    },
+    {
+        first_name: 'Jimmy',
+        last_name: 'Fargo',
+        email: 'jfargo@email.com'
+    }
+]
+
 // setup the route for the homepage using the get request
 app.get("/", function (req, res) {
     // res.send("I am a response in the screen"); // .send method prints out message on the screen
     res.render('index', {
-        title: 'Example Title'
+        title: 'Users',
+        users: users
     });
 })
 
