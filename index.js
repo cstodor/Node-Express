@@ -4,6 +4,8 @@ var path = require("path"); // simplifies file paths
 var expressValidator = require('express-validator'); // validator for forms
 var mongojs = require("mongojs"); // mongoJS to connect with app
 var db = mongojs("myusers", ["users"]); // MongoDB database and collection name
+var ObjectId = mongojs.ObjectId;
+
 
 var app = express();
 
@@ -76,16 +78,25 @@ app.post("/users/add", function (req, res) {
             last_name: req.body.last_name,
             email: req.body.email
         }
-        // Adds new User to the database
-        db.users.insert(newUser, function(err, result) {
-            if(err) {
+        // Adds New User to the database
+        db.users.insert(newUser, function (err, result) {
+            if (err) {
                 console.log(err);
-            } res.redirect("/")
+            }
+            res.redirect("/");
         })
     }
-
-
 })
+
+// Delete User from Database
+app.delete("/users/delete/:id", function (req, res) {
+    db.users.remove({ _id: ObjectId(req.params.id) }, function (err, result) {
+        if (err) {
+            console.log(err);
+        }
+        res.redirect("/");
+    })
+});
 
 // setting up the port where the application will run
 app.listen(3000, function () {
