@@ -42,30 +42,6 @@ app.use(expressValidator({
     }
 }));
 
-// Users Array Of Objects
-var users = [
-    {
-        first_name: "John",
-        last_name: "Doe",
-        email: "jdoe@email.com"
-    },
-    {
-        first_name: "Kelly",
-        last_name: "Smith",
-        email: "ksmith@email.com"
-    },
-    {
-        first_name: "Brian",
-        last_name: "Fargo",
-        email: "bfargo@email.com"
-    },
-    {
-        first_name: "Sarah",
-        last_name: "Skyler",
-        email: "sskyler@email.com"
-    }
-]
-
 // setup the route for the homepage using the get request
 app.get("/", function (req, res) {
     // res.send("I am a response in the screen"); // .send method prints out message on the screen
