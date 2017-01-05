@@ -7,7 +7,7 @@
 <!-- USERS LIST -->
 <ul>
 <% users.forEach(function(user){ %>
-    <li><%= user.first_name %> <%= user.last_name %></li>
+    <li><%= user.first_name %> <%= user.last_name %> - <a href="#" class="btn-delete" data-id="<%= user._id %>">Delete</a></li>
 <% }) %>
 </ul>
 
