@@ -5,6 +5,12 @@ var expressValidator = require('express-validator');
 
 var app = express();
 
+// Global Variables
+app.use(function(req, res, next){
+    res.locals.errors = null;
+    next();
+});
+
 // EJS Template Engine Middleware
 app.set("view engine", "ejs"); // specify the view engine. ejs in our case
 app.set("views", path.join(__dirname, "views")); // specify the folder that we want to use for our views
@@ -74,7 +80,7 @@ app.post("/users/add", function (req, res) {
         res.render("index", {
             title: "Users",
             users: users,
-            errors: errors
+            errors: errors 
         });
     } else {
         var newUser = {
