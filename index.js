@@ -6,7 +6,7 @@ var expressValidator = require('express-validator');
 var app = express();
 
 // Global Variables
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
     res.locals.errors = null;
     next();
 });
@@ -56,6 +56,11 @@ var users = [
         first_name: "Brian",
         last_name: "Fargo",
         email: "bfargo@email.com"
+    },
+    {
+        first_name: "Sarah",
+        last_name: "Skyler",
+        email: "sskyler@email.com"
     }
 ]
 
@@ -80,7 +85,7 @@ app.post("/users/add", function (req, res) {
         res.render("index", {
             title: "Users",
             users: users,
-            errors: errors 
+            errors: errors
         });
     } else {
         var newUser = {
