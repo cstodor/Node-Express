@@ -1,7 +1,9 @@
 var express = require("express");
 var bodyParser = require("body-parser"); // handles parsing requests
 var path = require("path"); // simplifies file paths
-var expressValidator = require('express-validator');
+var expressValidator = require('express-validator'); // validator for forms
+var mongojs = require("mongojs"); // mongoJS to connect with app
+var db = mongojs("myusers", ["users"]); // MongoDB database and collection name
 
 var app = express();
 
