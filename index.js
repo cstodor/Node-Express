@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser"); // handles parsing requests
 var path = require("path"); // simplifies file paths
+var expressValidator = require('express-validator');
 
 var app = express();
 
@@ -10,9 +11,28 @@ app.set("views", path.join(__dirname, "views")); // specify the folder that we w
 
 // Body Parser Middleware / top-level generic (most simple)
 app.use(bodyParser.json()); // handles parsing json content
-app.use(bodyParser.urlencoded({extended: false})); // parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 // Set Middleware for Public folder where Static Resources will be Stored
 app.use(express.static(path.join(__dirname, "public")));
+
+// Express Validator Middleware
+// In this example, the formParam value is going to get morphed into form body format useful for printing.
+app.use(expressValidator({
+    errorFormatter: function (param, msg, value) {
+        var namespace = param.split("."),
+            root = namespace.shift(),
+            formParam = root;
+
+        while (namespace.length) {
+            formParam += "[" + namespace.shift() + "]";
+        }
+        return {
+            param: formParam,
+            msg: msg,
+            value: value
+        };
+    }
+}));
 
 // Users Array Of Objects
 var users = [
@@ -42,7 +62,26 @@ app.get("/", function (req, res) {
     });
 })
 
-    console.log("FORM SUMITTED");
+app.post("/users/add", function (req, res) {
+
+    req.checkBody("first_name", "First Name is Required").notEmpty();
+    req.checkBody("last_name", "Last Name is Required").notEmpty();
+    req.checkBody("email", "Email Name is Required").notEmpty();
+
+    var errors = req.validationErrors();
+
+    if (errors) {
+        console.log("ERRORS");
+    } else {
+        var newUser = {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email
+        }
+        console.log(newUser);
+    }
+
+
 })
 
 // setting up the port where the application will run
