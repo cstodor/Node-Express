@@ -5,8 +5,8 @@ var path = require("path"); // simplifies file paths
 var app = express();
 
 // EJS Template Engine Middleware
-app.set('view engine', 'ejs'); // specify the view engine. ejs in our case
-app.set('views', path.join(__dirname, 'views')); // specify the folder that we want to use for our views
+app.set("view engine", "ejs"); // specify the view engine. ejs in our case
+app.set("views", path.join(__dirname, "views")); // specify the folder that we want to use for our views
 
 // Body Parser Middleware / top-level generic (most simple)
 app.use(bodyParser.json()); // handles parsing json content
@@ -17,29 +17,32 @@ app.use(express.static(path.join(__dirname, "public")));
 // Users Array Of Objects
 var users = [
     {
-        first_name: 'John',
-        last_name: 'Doe',
-        email: 'jdoe@email.com'
+        first_name: "John",
+        last_name: "Doe",
+        email: "jdoe@email.com"
     },
     {
-        first_name: 'Jane',
-        last_name: 'Smith',
-        email: 'jsmith@email.com'
+        first_name: "Kelly",
+        last_name: "Smith",
+        email: "ksmith@email.com"
     },
     {
-        first_name: 'Jimmy',
-        last_name: 'Fargo',
-        email: 'jfargo@email.com'
+        first_name: "Brian",
+        last_name: "Fargo",
+        email: "bfargo@email.com"
     }
 ]
 
 // setup the route for the homepage using the get request
 app.get("/", function (req, res) {
     // res.send("I am a response in the screen"); // .send method prints out message on the screen
-    res.render('index', {
-        title: 'Users',
+    res.render("index", {
+        title: "Users",
         users: users
     });
+})
+
+    console.log("FORM SUMITTED");
 })
 
 // setting up the port where the application will run
