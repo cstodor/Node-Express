@@ -76,7 +76,12 @@ app.post("/users/add", function (req, res) {
             last_name: req.body.last_name,
             email: req.body.email
         }
-        console.log(newUser);
+        // Adds new User to the database
+        db.users.insert(newUser, function(err, result) {
+            if(err) {
+                console.log(err);
+            } res.redirect("/")
+        })
     }
 
 
