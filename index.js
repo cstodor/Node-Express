@@ -71,7 +71,11 @@ app.post("/users/add", function (req, res) {
     var errors = req.validationErrors();
 
     if (errors) {
-        console.log("ERRORS");
+        res.render("index", {
+            title: "Users",
+            users: users,
+            errors: errors
+        });
     } else {
         var newUser = {
             first_name: req.body.first_name,
