@@ -69,10 +69,15 @@ var users = [
 // setup the route for the homepage using the get request
 app.get("/", function (req, res) {
     // res.send("I am a response in the screen"); // .send method prints out message on the screen
-    res.render("index", {
-        title: "Users",
-        users: users
-    });
+
+    db.users.find(function (err, docs) {
+        // docs is an array of all the documents in mycollection    
+        console.log(docs);
+        res.render("index", {
+            title: "Users",
+            users: docs
+        });
+    })
 })
 
 app.post("/users/add", function (req, res) {
